@@ -49,4 +49,22 @@ module Enumerable
     Math.sqrt(variance)
   end
 
+  ##
+  # Calculates the euclidean distance between the point represented by self and the point represented by the given enumerable.
+  #
+  # The two enumerables must be the same size.
+  #
+  # == Examples
+  #
+  #   [1].euclidean_distance [5] # => 4.0
+  #   [1, 2].euclidean_distance [1, 2] # => 0.0
+  #   [1, 2].euclidean_distance [1, 3] # => 1.0
+
+  def euclidean_distance(other)
+    # Create an array of pairs by merging each element of self with the corresponding element from other,
+    # calculate (a - b) ^ 2 for all pairs, where a is the first element and b is the second element,
+    # add the results together and return the square root of the result
+    Math.sqrt zip(other).map { |a, b| (a - b) ** 2 }.sum
+  end
+
 end
