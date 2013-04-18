@@ -67,4 +67,16 @@ module Enumerable
     Math.sqrt zip(other).map { |a, b| (a - b) ** 2 }.sum
   end
 
+  ##
+  # Calculates the mode of the dataset (the value that appears most often in the array).
+  #
+  # == Example
+  #
+  #   [:a, :b, :b].mode # => :b
+
+  def mode
+    # Group all occurrences of identical elements together, then find the largest group and return the first value in it
+    group_by { |e| e }.values.max_by(&:count).first
+  end
+
 end
