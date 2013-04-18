@@ -28,4 +28,10 @@ class TestEnumerable < MiniTest::Unit::TestCase
     assert_equal 0.0, [1, 2].euclidean_distance([1, 2])
     assert_equal 1.0, [1, 2].euclidean_distance([1, 3])
   end
+
+  def test_nth_subset
+    assert_equal [1], [1, 2, 3].nth_subset(1)
+    assert_equal [2], [1, 2, 3].nth_subset(2)
+    assert_equal [1, 2], [1, 2, 3].nth_subset(3)
+  end
 end

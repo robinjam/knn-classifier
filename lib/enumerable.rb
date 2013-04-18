@@ -67,4 +67,19 @@ module Enumerable
     Math.sqrt zip(other).map { |a, b| (a - b) ** 2 }.sum
   end
 
+  ##
+  # Returns the nth element of the powerset of this enumerable.
+  #
+  # == Example
+  #
+  #   [1, 2, 3].nth_subset(1) # => [1]
+  #   [1, 2, 3].nth_subset(2) # => [2]
+  #   [1, 2, 3].nth_subset(3) # => [1, 2]
+
+  def nth_subset(n)
+    # Ruby allows us to index integers as if they were arrays of bits,
+    # so we can check if an element should be included in the result by testing if the ith bit of n is 1
+    each_with_index.map { |e, i| e if n[i] == 1 }.compact
+  end
+
 end

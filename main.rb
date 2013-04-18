@@ -47,20 +47,16 @@ def main
         filtered_lines = lines.reject { |p, _| p == point }.
 
         # Exclude variables we're not using
-        # Ruby allows us to index integers as if they were arrays of bits,
-        # so we can check if a variable should be used by testing if the ith bit of n is 1
-        map { |line| [line.first.each_with_index.map { |e, i| e if n[i] == 1 }.compact, line.last] }
+        map { |line| [line.first.nth_subset(n), line.last] }
 
         # Create a KNN classifier using the filtered set
         knn = KnnClassifier.new(filtered_lines)
 
-        point = point.each_with_index.map { |e, i| e if n[i] == 1 }.compact
-
         # Check if the classification was correct
-        knn.classify(point, k) == classification
+        knn.classify(point.nth_subset(n), k) == classification
       end.count(true) / lines.count.to_f
 
-      vars = 1.upto(variables.count).each_with_index.map { |e, i| e if n[i] == 1 }.compact.join(" ")
+      vars = 1.upto(variables.count).nth_subset(n).join(" ")
       puts "#{k},#{vars},#{accuracy}"
       $stdout.flush
     end
