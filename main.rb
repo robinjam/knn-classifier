@@ -45,6 +45,7 @@ def main
     end.count(true) / lines.count.to_f
 
     puts "#{k},#{accuracy}"
+    $stdout.flush
   end
 end
 
