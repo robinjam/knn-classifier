@@ -1,0 +1,15 @@
+= KNN Classifier
+
+This is a basic K-Nearest Neighbours classifier written in Ruby. It was tested against Ruby 2.0 and has no additional dependencies.
+
+* To run the program:
+
+    ruby -Ilib main.rb
+
+* To run the unit tests:
+
+    rake test
+
+* To regenerate the RDoc documentation:
+
+    rake rerdoc
