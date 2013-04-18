@@ -28,8 +28,4 @@ class TestEnumerable < MiniTest::Unit::TestCase
     assert_equal 0.0, [1, 2].euclidean_distance([1, 2])
     assert_equal 1.0, [1, 2].euclidean_distance([1, 3])
   end
-
-  def test_mode
-    assert_equal :b, [:a, :b, :b].mode
-  end
 end

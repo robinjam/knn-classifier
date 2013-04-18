@@ -10,4 +10,9 @@ describe KnnClassifier do
     @knn.classify([6, 6], 3).must_equal "A"
     @knn.classify([9, 9], 3).must_equal "B"
   end
+
+  it "reduces k and tries again if there is a tie" do
+    @knn.classify([6, 6], 4).must_equal "A"
+    @knn.classify([9, 9], 4).must_equal "B"
+  end
 end

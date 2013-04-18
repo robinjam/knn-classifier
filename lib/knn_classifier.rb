@@ -28,7 +28,7 @@ class KnnClassifier
 
   def classify(point, k)
     # Sort the data based on the euclidean distance from the given point
-    @data.sort_by { |datapoint, _| point.euclidean_distance(datapoint) }.
+    tmp = @data.sort_by { |datapoint, _| point.euclidean_distance(datapoint) }.
 
     # Limit to the nearest k datapoints
     first(k).
@@ -36,8 +36,18 @@ class KnnClassifier
     # Get the classifications for these points
     map(&:last).
 
-    # Return the most frequent classification
-    mode
+    # Create a hash mapping each classification to its frequency
+    reduce(Hash.new(0)) { |hash, e| hash[e] += 1; hash }.
+
+    # Sort in descending order of frequency
+    sort_by(&:last).reverse
+
+    # If there is a tie, repeat with k = k - 1
+    if tmp.length > 1 && tmp[0].last == tmp[1].last
+      classify(point, k - 1)
+    else
+      tmp[0].first
+    end
   end
 
 end
